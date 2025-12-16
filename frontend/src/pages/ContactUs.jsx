@@ -1,0 +1,140 @@
+import { useState } from "react";
+import styles from "../css/ContactUs.module.css";
+
+function ContactUs() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!form.name.trim()) newErrors.name = "Name is required.";
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email)) {
+      newErrors.email = "Enter a valid email.";
+    }
+    if (!form.subject.trim()) newErrors.subject = "Subject is required.";
+    if (!form.message.trim()) newErrors.message = "Message is required.";
+    return newErrors;
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: undefined });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validation = validate();
+    if (Object.keys(validation).length > 0) {
+      setErrors(validation);
+      return;
+    }
+    setSubmitted(true);
+    // Here you would send the form data to your backend or email service
+    // Reset form if needed: setForm({ name: "", email: "", subject: "", message: "" });
+  };
+
+  return (
+    <div className={`contact-container ${styles.container}`}>
+      <h1 className="contact-title">Contact Us</h1>
+      <p className="contact-description">
+        Have a question, partnership inquiry, or feedback? Fill out the form
+        below and our team will get back to you soon.
+      </p>
+      {submitted ? (
+        <div className="contact-success">
+          <h2>Thank you!</h2>
+          <p>Your message has been sent. We’ll be in touch soon.</p>
+        </div>
+      ) : (
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <div className="form-group">
+            <label htmlFor="name">
+              Name<span>*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              autoComplete="name"
+              className={errors.name ? "input-error" : ""}
+            />
+            {errors.name && <span className="error">{errors.name}</span>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">
+              Email<span>*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              autoComplete="email"
+              className={errors.email ? "input-error" : ""}
+            />
+            {errors.email && <span className="error">{errors.email}</span>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="subject">
+              Subject<span>*</span>
+            </label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              value={form.subject}
+              onChange={handleChange}
+              className={errors.subject ? "input-error" : ""}
+            />
+            {errors.subject && <span className="error">{errors.subject}</span>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="message">
+              Message<span>*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              value={form.message}
+              onChange={handleChange}
+              className={errors.message ? "input-error" : ""}
+            />
+            {errors.message && <span className="error">{errors.message}</span>}
+          </div>
+          <button type="submit" className="contact-submit">
+            Send Message
+          </button>
+        </form>
+      )}
+      <div className="contact-info">
+        <h2>Other ways to reach us</h2>
+        <ul>
+          <li>
+            Email:{" "}
+            <a href="mailto:info@dcxdistributions.com">
+              info@dcxdistributions.com
+            </a>
+          </li>
+          <li>
+            Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
+          </li>
+          <li>Address: 123 DCX Lane, City, Country</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default ContactUs;

@@ -1,0 +1,38 @@
+:root {
+  --color-bg: #0d121b;
+  --color-text: #f3f6fa;
+  --color-muted: #b0b6c3;
+  --color-primary: #00e1ff;
+  --color-primary-dark: #0077ff;
+  --font-sans: "Inter", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Inter"),
+    url("https://fonts.gstatic.com/s/inter/v12/UcCO3Fwrf3X0PXSNqk.ttf")
+      format("truetype");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: var(--color-primary);
+}
