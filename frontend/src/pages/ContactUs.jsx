@@ -42,20 +42,20 @@ function ContactUs() {
   };
 
   return (
-    <div className={`contact-container ${styles.container}`}>
-      <h1 className="contact-title">Contact Us</h1>
-      <p className="contact-description">
+    <div className={styles.container}>
+      <h1 className={styles.title}>Contact Us</h1>
+      <p className={styles.description}>
         Have a question, partnership inquiry, or feedback? Fill out the form
         below and our team will get back to you soon.
       </p>
       {submitted ? (
-        <div className="contact-success">
+        <div className={styles.success}>
           <h2>Thank you!</h2>
-          <p>Your message has been sent. We’ll be in touch soon.</p>
+          <p>Your message has been sent. We'll be in touch soon.</p>
         </div>
       ) : (
-        <form className="contact-form" onSubmit={handleSubmit} noValidate>
-          <div className="form-group">
+        <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          <div className={styles.formGroup}>
             <label htmlFor="name">
               Name<span>*</span>
             </label>
@@ -66,11 +66,11 @@ function ContactUs() {
               value={form.name}
               onChange={handleChange}
               autoComplete="name"
-              className={errors.name ? "input-error" : ""}
+              className={errors.name ? styles.inputError : ""}
             />
-            {errors.name && <span className="error">{errors.name}</span>}
+            {errors.name && <span className={styles.error}>{errors.name}</span>}
           </div>
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="email">
               Email<span>*</span>
             </label>
@@ -81,11 +81,13 @@ function ContactUs() {
               value={form.email}
               onChange={handleChange}
               autoComplete="email"
-              className={errors.email ? "input-error" : ""}
+              className={errors.email ? styles.inputError : ""}
             />
-            {errors.email && <span className="error">{errors.email}</span>}
+            {errors.email && (
+              <span className={styles.error}>{errors.email}</span>
+            )}
           </div>
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="subject">
               Subject<span>*</span>
             </label>
@@ -95,11 +97,13 @@ function ContactUs() {
               name="subject"
               value={form.subject}
               onChange={handleChange}
-              className={errors.subject ? "input-error" : ""}
+              className={errors.subject ? styles.inputError : ""}
             />
-            {errors.subject && <span className="error">{errors.subject}</span>}
+            {errors.subject && (
+              <span className={styles.error}>{errors.subject}</span>
+            )}
           </div>
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="message">
               Message<span>*</span>
             </label>
@@ -109,16 +113,18 @@ function ContactUs() {
               rows={5}
               value={form.message}
               onChange={handleChange}
-              className={errors.message ? "input-error" : ""}
+              className={errors.message ? styles.inputError : ""}
             />
-            {errors.message && <span className="error">{errors.message}</span>}
+            {errors.message && (
+              <span className={styles.error}>{errors.message}</span>
+            )}
           </div>
-          <button type="submit" className="contact-submit">
+          <button type="submit" className={styles.submit}>
             Send Message
           </button>
         </form>
       )}
-      <div className="contact-info">
+      <div className={styles.info}>
         <h2>Other ways to reach us</h2>
         <ul>
           <li>

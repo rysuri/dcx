@@ -150,11 +150,11 @@ function FAQ() {
 
   return (
     <div className={styles.container}>
-      <main className="faq-main-bg">
-        <section className="faq-full-container">
-          <header className="faq-header">
+      <main className={styles["faq-main-bg"]}>
+        <section className={styles["faq-full-container"]}>
+          <header className={styles["faq-header"]}>
             <h1>Frequently Asked Questions</h1>
-            <div className="faq-search">
+            <div className={styles["faq-search"]}>
               <input
                 type="text"
                 placeholder="Search questions..."
@@ -164,11 +164,11 @@ function FAQ() {
               />
             </div>
           </header>
-          <nav className="faq-tabs">
+          <nav className={styles["faq-tabs"]}>
             {faqSections.map((section) => (
               <button
                 key={section.name}
-                className={activeTab === section.name ? "active" : ""}
+                className={activeTab === section.name ? styles.active : ""}
                 onClick={() => {
                   setActiveTab(section.name);
                   setSearch("");
@@ -180,23 +180,23 @@ function FAQ() {
               </button>
             ))}
           </nav>
-          <div className="faq-list">
+          <div className={styles["faq-list"]}>
             {filteredFaq.length > 0 ? (
               filteredFaq.map((item, idx) => (
                 <div
-                  className={`faq-accordion-item${
-                    openIndexes[idx] ? " open" : ""
+                  className={`${styles["faq-accordion-item"]}${
+                    openIndexes[idx] ? ` ${styles.open}` : ""
                   }`}
                   key={idx}
                 >
                   <button
-                    className="faq-accordion-title"
+                    className={styles["faq-accordion-title"]}
                     onClick={() => handleToggle(idx)}
                     aria-expanded={!!openIndexes[idx]}
                     aria-controls={`faq-panel-${idx}`}
                   >
                     <span>{item.question}</span>
-                    <span className="faq-accordion-icon">
+                    <span className={styles["faq-accordion-icon"]}>
                       {openIndexes[idx] ? (
                         <svg width="18" height="18" viewBox="0 0 18 18">
                           <path
@@ -221,7 +221,7 @@ function FAQ() {
                     </span>
                   </button>
                   <div
-                    className="faq-accordion-panel"
+                    className={styles["faq-accordion-panel"]}
                     id={`faq-panel-${idx}`}
                     style={{
                       maxHeight: openIndexes[idx] ? "200px" : "0",
@@ -233,7 +233,7 @@ function FAQ() {
                 </div>
               ))
             ) : (
-              <div className="faq-empty">No results found.</div>
+              <div className={styles["faq-empty"]}>No results found.</div>
             )}
           </div>
         </section>
